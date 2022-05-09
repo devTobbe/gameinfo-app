@@ -1,21 +1,28 @@
 export async function getStaticProps() {
 
-  const res = await fetch('https://api.rawg.io/api/games?key=dc469c23c1bb4c1bbb5d9562b46e5082&page=1&page_size=100');
+  const res = await fetch('https://api.rawg.io/api/games?key=dc469c23c1bb4c1bbb5d9562b46e5082');
   const data = await res.json();
-  const games = data.results;
 
   return {
-    props: { games }
+    props: { 
+      count: data.count,
+      games: data.results,
+      prevPage: data.previous,
+      nextPage: data.next
+    }
   }
 }
 
-export default function Home( {games} ) {
+export default function Home( {count, games, prevPage, nextPage} ) {
 
   return (
-    <ul>
-      {games.map((game) => (
-        <li>{game.name}</li>
-      ))}
-    </ul>
+      <main>
+        <h1 className="text-lg">We have {count} games.</h1> 
+          <ul>
+            {games.map((game) => (
+              <li key={game.id}>{game.name}</li>
+            ))}
+          </ul>
+      </main>
   );
 }
