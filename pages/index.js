@@ -30,6 +30,7 @@ export default function Home({ count, games, prevPage, nextPage }) {
           rel="stylesheet"
         />
       </Head>
+      <Navbar />
       <a id="top"></a>
 
       <div className="">
