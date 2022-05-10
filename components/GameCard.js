@@ -9,9 +9,9 @@ export default function GameCard({game}) {
     useEffect(() => {
         const fetchPrices = async () => {
             try {
-                const response = await fetch(`${'https://www.cheapshark.com/api/1.0/deals?title='}${game.name}`);
-                if (!response.ok) throw Error('Did not receive prices.');
-                const deals = await response.json();
+                const gameResponse = await fetch(`${'https://www.cheapshark.com/api/1.0/deals?title='}${game.name}`);
+                if (!gameResponse.ok) throw Error('Did not receive prices.');
+                const deals = await gameResponse.json();
                 deals.map((deal) => {
                     if (deal.isOnSale === "1") {
                         if (deal.salePrice < bestPrice || bestPrice === '') {
@@ -26,32 +26,22 @@ export default function GameCard({game}) {
                         }
                     }
                 });
+
+                const storeResponse = await fetch('https://www.cheapshark.com/api/1.0/stores');
+                if (!storeResponse.ok) throw Error('Did not receive prices.');
+                const stores = await storeResponse.json();
+                stores.map((store) => {
+                    if (store.storeID === storeId) {
+                        setStoreName(store.storeName);
+                    }
+                });
+                
             } catch (err) {
                 console.log(err.message);
             }
         }
 
         (async () => await (fetchPrices()))();
-
-    }, []);
-
-    useEffect(() => {
-        const fetchStore = async () => {
-            try {
-                const response = await fetch('https://www.cheapshark.com/api/1.0/stores');
-                if (!response.ok) throw Error('Did not receive prices.');
-                const stores = await response.json();
-                stores.map((store) => {
-                    if (store.storeID === storeId) {
-                        setStoreName(store.storeName);
-                    }
-                });
-            } catch (err) {
-                console.log(err.message);
-            }
-        }
-
-        (async () => await (fetchStore()))();
 
     }, []);
 
@@ -77,7 +67,9 @@ export default function GameCard({game}) {
               </div>
               <div className="text-right">
                 <div>{game.released}</div>
-                <div>GENRE 1, GENRE 2</div>
+                <div>{game.genres.slice(0, 2).map((genre) => (
+                  genre.name + ' '
+                ))}</div>
               </div>
             </div>
             <div className="mx-6 mb-4">
@@ -85,8 +77,8 @@ export default function GameCard({game}) {
                 <div>Cheapest</div>
               </div>
               <div className="flex justify-between text-right align-middle">
-                <div>STORE: {storeName}</div>
-                <button className="p-2 bg-zinc-900 rounded-xl">{bestPrice}$</button>
+                <div>{storeName}</div>
+                <button className="p-2 bg-zinc-900 rounded-xl">{bestPrice !== '' ? bestPrice + '$' : 'Not Available'}</button>
               </div>
             </div>
           </div>
