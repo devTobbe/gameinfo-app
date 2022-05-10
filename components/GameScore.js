@@ -1,6 +1,6 @@
 export default function GameScore({ score }) {
   var highscore = 75;
-  var lowscore = 40;
+  var lowscore = 50;
   if (score > highscore) {
     return (
       <div className="relative">
