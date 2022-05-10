@@ -1,7 +1,7 @@
-export default function GameCard({ title }) {
+export default function GameCard() {
   return (
     <div class="relative">
-      <div class="flex w-80 flex-col justify-center rounded-3xl bg-zinc-800  text-white">
+      <div class="flex w-80 flex-col justify-center rounded-3xl bg-zinc-800 text-white drop-shadow-lg">
         <img
           src="https://www.creocommunity.es/wp-content/uploads/2022/03/La-actualizacion-de-proxima-generacion-de-Grand-Theft-Auto-5.jpg"
           class="rounded-t-3xl object-cover w-full h-40"
@@ -13,7 +13,7 @@ export default function GameCard({ title }) {
             </div>
           </div>
           <div class="">
-            <div class=" text-xl mb-6 ml-6">GRAND THEFT AUTO 5</div>
+            <div class=" text-xl mb-6 ml-6">GAME TITLE</div>
             <div class="mx-6 flex justify-between mb-14 ">
               <div>
                 <div>Release</div>
@@ -30,7 +30,7 @@ export default function GameCard({ title }) {
               </div>
               <div class="text-right flex justify-between align-middle">
                 <div>STORE:</div>
-                <div class="bg-zinc-900 p-2 rounded-xl">BUTTON</div>
+                <button class="bg-zinc-900 p-2 rounded-xl">BUTTON</button>
               </div>
             </div>
           </div>
