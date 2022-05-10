@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import GameScore from "./GameScore";
 
 export default function GameCard({ game }) {
-
   const [bestPrice, setBestPrice] = useState("");
   const [storeId, setStoreId] = useState("");
   const [storeName, setStoreName] = useState("");
-  const [dealId, setDealId] = useState('');
+  const [dealId, setDealId] = useState("");
 
   useEffect(() => {
     const fetchPrices = async () => {
@@ -51,7 +50,7 @@ export default function GameCard({ game }) {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative w-80 mb-4">
       <div className="flex flex-col justify-center text-white group w-80 rounded-3xl bg-zinc-800 drop-shadow-lg">
         <img
           src={game.background_image}
@@ -83,7 +82,15 @@ export default function GameCard({ game }) {
                 <div className="flex justify-between text-right align-middle">
                   <div>{storeName}</div>
                   <a className="p-2 bg-zinc-900 rounded-xl">
-                    {bestPrice !== '' ? <a href={`${'https://www.cheapshark.com/redirect?dealID='}${dealId}`}>{bestPrice}$</a> : 'Not Available'}
+                    {bestPrice !== "" ? (
+                      <a
+                        href={`${"https://www.cheapshark.com/redirect?dealID="}${dealId}`}
+                      >
+                        {bestPrice}$
+                      </a>
+                    ) : (
+                      "Not Available"
+                    )}
                   </a>
                 </div>
               </div>
