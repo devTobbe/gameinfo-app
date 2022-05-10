@@ -28,4 +28,13 @@ export default function GameScore({ score }) {
       </div>
     );
   }
+  if (score == null) {
+    return (
+      <div className="relative">
+        <div className="border inline-flex px-1 rounded-lg border-white text-white bg-white/[0.1] mt-1 mr-1">
+          ?
+        </div>
+      </div>
+    );
+  }
 }
