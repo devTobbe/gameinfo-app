@@ -1,8 +1,8 @@
-import GameItem from "../components/GameItem";
+import GameCard from "../components/GameCard";
 
 export async function getStaticProps() {
 
-  const res = await fetch('https://api.rawg.io/api/games?key=dc469c23c1bb4c1bbb5d9562b46e5082');
+  const res = await fetch('https://api.rawg.io/api/games?key=dc469c23c1bb4c1bbb5d9562b46e5082&platforms=4');
   const data = await res.json();
 
   return {
@@ -23,9 +23,9 @@ export default function Home( {count, games, prevPage, nextPage} ) {
             <h1>Games</h1>
           </div>
           <div className="basis-1/2">
-            <div className="grid grid-cols-2 gap-4 basis-7/12">
+            <div className="grid grid-cols-1 gap-4">
                 {games.map((game) => (
-                  <GameItem key={game.id} game={game}></GameItem>
+                  <GameCard key={game.id} game={game}></GameCard>
                 ))}
             </div>
           </div>
