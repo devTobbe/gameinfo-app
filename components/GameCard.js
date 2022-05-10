@@ -50,7 +50,7 @@ export default function GameCard({ game }) {
   }, []);
 
   return (
-    <div className="relative w-80 mb-4">
+    <div className="relative w-80 m-4">
       <div className="flex flex-col justify-center text-white group w-80 rounded-3xl bg-zinc-800 drop-shadow-lg">
         <img
           src={game.background_image}
@@ -85,6 +85,8 @@ export default function GameCard({ game }) {
                     {bestPrice !== "" ? (
                       <a
                         href={`${"https://www.cheapshark.com/redirect?dealID="}${dealId}`}
+                        rel="noopener noreferrer"
+                        target="_blank"
                       >
                         {bestPrice}$
                       </a>
