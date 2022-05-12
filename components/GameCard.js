@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import GameScore from "./GameScore";
 
 export default function GameCard({ game }) {
-  
   const [bestPrice, setBestPrice] = useState("");
   const [storeName, setStoreName] = useState("");
   const [dealId, setDealId] = useState("");
@@ -10,7 +9,6 @@ export default function GameCard({ game }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchPrices = async () => {
-
     setIsLoading(true);
 
     try {
@@ -29,13 +27,12 @@ export default function GameCard({ game }) {
       const stores = await storeResponse.json();
 
       await checkStores(stores, storeId);
-      
     } catch (err) {
       console.log(err.message);
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   const findBestValue = async (deals) => {
     let priceValue = "";
@@ -60,7 +57,7 @@ export default function GameCard({ game }) {
     setBestPrice(priceValue);
     setDealId(dealIdValue);
     return storeIdValue;
-  }
+  };
 
   const checkStores = async (stores, storeId) => {
     stores.map((store) => {
@@ -68,21 +65,24 @@ export default function GameCard({ game }) {
         setStoreName(store.storeName);
       }
     });
-  }
+  };
 
   return (
     <div className="relative m-4 w-80">
-      <div className="flex flex-col justify-center text-white group w-80 rounded-3xl bg-zinc-800 drop-shadow-lg" onMouseEnter={fetchPrices}>
+      <div
+        className="flex flex-col justify-center text-white group w-80 rounded-3xl bg-zinc-800 drop-shadow-lg"
+        onMouseEnter={fetchPrices}
+      >
         <img
           src={game.background_image}
           className="object-cover w-full h-40 rounded-t-3xl"
         />
-        <div className="">
-          <div className="flex justify-end">
+        <div className="font-Roboto">
+          <div className="flex justify-end ">
             <GameScore score={game.metacritic}></GameScore>
           </div>
           <div className="">
-            <div className="mb-6 ml-6 text-xl ">{game.name}</div>
+            <div className="mb-6 ml-6 text-xl">{game.name}</div>
             <div className="hidden group-hover:block">
               <div className="flex justify-between mx-6 mb-14 ">
                 <div>
@@ -104,7 +104,8 @@ export default function GameCard({ game }) {
                   <div>{storeName}</div>
                   {isLoading && "Loading"}
                   {bestPrice !== "" && !isLoading && (
-                    <a className="p-2 bg-zinc-900 rounded-xl"
+                    <a
+                      className="p-2 bg-zinc-900 rounded-xl"
                       href={`${"https://www.cheapshark.com/redirect?dealID="}${dealId}`}
                       rel="noopener noreferrer"
                       target="_blank"
@@ -112,9 +113,7 @@ export default function GameCard({ game }) {
                       {bestPrice}$
                     </a>
                   )}
-                  {bestPrice === "" && !isLoading && (
-                    "Not Available"
-                  )}
+                  {bestPrice === "" && !isLoading && "Not Available"}
                 </div>
               </div>
             </div>
