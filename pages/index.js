@@ -51,9 +51,13 @@ export default function Home() {
               Featured in May
             </h4>
           </div>
-          <Search setGames={setGames} setPrevPageLink={setPrevPageLink} setNextPageLink={setNextPageLink} />
+          <Search
+            setGames={setGames}
+            setPrevPageLink={setPrevPageLink}
+            setNextPageLink={setNextPageLink}
+          />
           <div className="flex items-center justify-center">
-            <div className="flex flex-col flex-wrap items-center md:h-[2950px] md:w-[704px] xl:h-[2150px] xl:w-[1056px] 2xl:h-[1600px] 2xl:w-[1408px]">
+            <div className="flex flex-col flex-wrap items-center md:h-[3200px] md:w-[704px] xl:h-[2250px] xl:w-[1056px] 2xl:h-[1670px] 2xl:w-[1408px]">
               {games.map((game) => (
                 <GameCard key={game.id} game={game}></GameCard>
               ))}
