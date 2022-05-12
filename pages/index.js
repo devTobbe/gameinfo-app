@@ -2,15 +2,14 @@ import GameCard from "../components/GameCard";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
 import PageNavigation from "../components/PageNavigation";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 
 export default function Home() {
-
   const [games, setGames] = useState([]);
 
-  const [prevPageLink, setPrevPageLink] = useState('');
-  const [nextPageLink, setNextPageLink] = useState('');
+  const [prevPageLink, setPrevPageLink] = useState("");
+  const [nextPageLink, setNextPageLink] = useState("");
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -23,12 +22,11 @@ export default function Home() {
         setGames(games.results);
         setPrevPageLink(games.previous);
         setNextPageLink(games.next);
-        
       } catch (err) {
         console.log(err.message);
       }
     };
-  
+
     (async () => await fetchGames())();
   }, []);
 
@@ -85,14 +83,22 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="">
-            <div className="flex flex-col flex-wrap items-center justify-center md:flex-row">
+          <div className="flex items-center justify-center">
+            <div className="flex flex-col flex-wrap items-center md:h-[2950px] md:w-[650px] xl:h-[2150px] xl:w-[970px] 2xl:h-[1600px] 2xl:w-[1290px]">
               {games.map((game) => (
-                <GameCard key={game.id} game={game}></GameCard>
+                <div className="">
+                  <GameCard key={game.id} game={game}></GameCard>
+                </div>
               ))}
             </div>
           </div>
-          <PageNavigation prevPageLink={prevPageLink} setPrevPageLink={setPrevPageLink} nextPageLink={nextPageLink} setNextPageLink={setNextPageLink} setGames={setGames} />
+          <PageNavigation
+            prevPageLink={prevPageLink}
+            setPrevPageLink={setPrevPageLink}
+            nextPageLink={nextPageLink}
+            setNextPageLink={setNextPageLink}
+            setGames={setGames}
+          />
         </div>
       </main>
       <Footer />
