@@ -19,7 +19,7 @@ export default function GameScore({ score }) {
       </div>
     );
   }
-  if (score < lowscore) {
+  if (score < lowscore && score > 0) {
     return (
       <div className="relative">
         <div className="border inline-flex px-1 rounded-lg border-red-400 text-red-400 bg-red-400/[0.1] mt-1 mr-1">
@@ -28,7 +28,7 @@ export default function GameScore({ score }) {
       </div>
     );
   }
-  if (score == null) {
+  if (score === null) {
     return (
       <div className="relative">
         <div className="border inline-flex px-1 rounded-lg border-white text-white bg-white/[0.1] mt-1 mr-1">
