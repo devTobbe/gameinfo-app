@@ -10,8 +10,8 @@ module.exports = {
         accent: "#00C880",
       },
       fontFamily: {
-        Oswald: ['"Rubik"'],
-        Oxygen: ['"Roboto"'],
+        Rubik: ["'Rubik'"],
+        Roboto: ["'Roboto'"],
       },
     },
   },
