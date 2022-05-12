@@ -6,8 +6,9 @@ const PageNavigation = ({
   nextPageLink,
   setNextPageLink,
   setGames,
+  currentPageNumber,
+  setCurrentPageNumber
 }) => {
-  const [currentPageNumber, setCurrentPageNumber] = useState(1);
 
   const handlePageDecrease = async (e) => {
     try {
@@ -38,13 +39,13 @@ const PageNavigation = ({
   };
 
   return (
-    <div className="basis-1/10 mb-4">
+    <div className="mb-4 basis-1/10">
       <div className="flex flex-row justify-center">
         {prevPageLink === null ? (
-          <button className="text-accent h-6">
+          <button className="h-6 text-accent">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 stroke-accent"
+              className="w-6 h-6 stroke-accent"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2}
@@ -57,10 +58,10 @@ const PageNavigation = ({
             </svg>
           </button>
         ) : (
-          <button className="text-accent h-6" onClick={handlePageDecrease}>
+          <button className="h-6 text-accent" onClick={handlePageDecrease}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 stroke-accent"
+              className="w-6 h-6 stroke-accent"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2}
@@ -73,13 +74,13 @@ const PageNavigation = ({
             </svg>
           </button>
         )}
-        <p className=" italic text-center font-roboto font-style: text-slate-50">
+        <p className="italic text-center  font-roboto font-style: text-slate-50">
           Page {currentPageNumber}
         </p>
-        <button className="text-accent h-6" onClick={handlePageIncrease}>
+        <button className="h-6 text-accent" onClick={handlePageIncrease}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="w-6 h-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

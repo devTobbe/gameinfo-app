@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-const Search = ({setGames, setPrevPageLink, setNextPageLink }) => {
+const Search = ({setGames, setPrevPageLink, setNextPageLink, setCurrentPageNumber}) => {
 
     const [search, setSearch] = useState("");
 
@@ -14,6 +14,7 @@ const Search = ({setGames, setPrevPageLink, setNextPageLink }) => {
             if (!gameResponse.ok) throw Error("Did not receive games.");
             const games = await gameResponse.json();
             setGames(games.results);
+            setCurrentPageNumber(1);
             setPrevPageLink(games.previous);
             setNextPageLink(games.next);
           } catch (err) {
@@ -25,7 +26,7 @@ const Search = ({setGames, setPrevPageLink, setNextPageLink }) => {
     <div className="">
         <div className="mb-3">
             <div className="relative flex flex-row justify-center w-full mb-4 input-group">
-                <form onSubmit={handleSearch}>
+                <form className='flex flex-row' onSubmit={handleSearch}>
                     <input
                         type="search"
                         className="mx-2 form-control relative min-w-0 block w-60 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-accent focus:outline-none"

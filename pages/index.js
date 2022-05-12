@@ -12,6 +12,8 @@ export default function Home() {
   const [prevPageLink, setPrevPageLink] = useState("");
   const [nextPageLink, setNextPageLink] = useState("");
 
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
+
   useEffect(() => {
     const fetchGames = async () => {
       try {
@@ -55,6 +57,7 @@ export default function Home() {
             setGames={setGames}
             setPrevPageLink={setPrevPageLink}
             setNextPageLink={setNextPageLink}
+            setCurrentPageNumber={setCurrentPageNumber}
           />
           <div className="flex items-center justify-center">
             <div className="flex flex-col flex-wrap items-center md:h-[3200px] md:w-[704px] xl:h-[2250px] xl:w-[1056px] 2xl:h-[1670px] 2xl:w-[1408px]">
@@ -69,6 +72,8 @@ export default function Home() {
             nextPageLink={nextPageLink}
             setNextPageLink={setNextPageLink}
             setGames={setGames}
+            currentPageNumber={currentPageNumber}
+            setCurrentPageNumber={setCurrentPageNumber}
           />
         </div>
       </main>
