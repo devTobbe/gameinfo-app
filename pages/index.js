@@ -32,29 +32,30 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto&family=Rubik&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <main className="flex flex-col bg-zinc-900">
-        <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Roboto&family=Rubik&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
         <Navbar />
         <a id="top"></a>
-        <Navbar />
         <div className="">
-          <div className="py-8 text-center basis-2/5 font-Rubrik">
-            <h1 className="text-2xl text-slate-50">Games</h1>
-            <h4 className="text-accent text-1xl">Featured in May</h4>
+          <div className="py-8 text-center basis-2/5">
+            <h1 className="text-2xl text-slate-50 font-Rubik">Games</h1>
+            <h4 className="text-accent text-1xl font-Roboto">
+              Featured in May
+            </h4>
           </div>
           <div className="">
             <div className="mb-3">
               <div className="relative flex flex-row justify-center w-full mb-4 input-group">
                 <input
                   type="search"
-                  className="form-control relative min-w-0 block w-60 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-accent focus:outline-none"
+                  className="mx-2 form-control relative min-w-0 block w-60 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-accent focus:outline-none"
                   placeholder="Search"
                   aria-label="Search"
                   aria-describedby="button-addon2"
@@ -65,19 +66,33 @@ export default function Home() {
                   id="button-addon2"
                 >
                   <svg
-                    aria-hidden="true"
-                    focusable="false"
-                    data-prefix="fas"
-                    data-icon="search"
-                    className="w-4"
-                    role="img"
                     xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
+                    className="h-6 w-6 mx-2 stroke-gray-900"
+                    fill="none"
+                    viewBox="0 0 24 24 "
+                    stroke="currentColor"
+                    strokeWidth={2}
                   >
                     <path
-                      fill="currentColor"
-                      d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
-                    ></path>
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                </button>
+                <button className="mx-2 border-accent hover:border-accent/70 hover:stroke-accent/70 border-2 rounded-md w-[50px] h-[50px] flex justify-center items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 stroke-accent  "
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                    />
                   </svg>
                 </button>
               </div>
