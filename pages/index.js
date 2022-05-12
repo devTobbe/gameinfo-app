@@ -84,7 +84,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <div className="flex flex-col flex-wrap items-center md:h-[2950px] md:w-[650px] xl:h-[2150px] xl:w-[970px] 2xl:h-[1600px] 2xl:w-[1290px]">
+            <div className="flex flex-col flex-wrap items-center md:h-[2950px] md:w-[704px] xl:h-[2150px] xl:w-[1056px] 2xl:h-[1600px] 2xl:w-[1408px]">
               {games.map((game) => (
                 <div className="">
                   <GameCard key={game.id} game={game}></GameCard>
