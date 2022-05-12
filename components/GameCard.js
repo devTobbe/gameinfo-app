@@ -13,7 +13,9 @@ export default function GameCard({ game }) {
 
     try {
       const gameResponse = await fetch(
-        `${"https://www.cheapshark.com/api/1.0/deals?exact=1&title="}${game.name}`
+        `${"https://www.cheapshark.com/api/1.0/deals?exact=1&title="}${
+          game.name
+        }`
       );
       if (!gameResponse.ok) throw Error("Did not receive deals.");
       const deals = await gameResponse.json();
