@@ -43,7 +43,7 @@ export default function Home() {
           rel="stylesheet"
         />
       </Head>
-      <main className="flex flex-col bg-zinc-900">
+      <div className="flex flex-col bg-zinc-900">
         <Navbar />
         <a id="top"></a>
         <div className="">
@@ -57,6 +57,15 @@ export default function Home() {
             setGames={setGames}
             setPrevPageLink={setPrevPageLink}
             setNextPageLink={setNextPageLink}
+            setCurrentPageNumber={setCurrentPageNumber}
+          />
+          <PageNavigation
+            prevPageLink={prevPageLink}
+            setPrevPageLink={setPrevPageLink}
+            nextPageLink={nextPageLink}
+            setNextPageLink={setNextPageLink}
+            setGames={setGames}
+            currentPageNumber={currentPageNumber}
             setCurrentPageNumber={setCurrentPageNumber}
           />
           <div className="flex items-center justify-center">
@@ -76,7 +85,7 @@ export default function Home() {
             setCurrentPageNumber={setCurrentPageNumber}
           />
         </div>
-      </main>
+      </div>
       <Footer />
     </>
   );

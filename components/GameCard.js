@@ -13,7 +13,7 @@ export default function GameCard({ game }) {
 
     try {
       const gameResponse = await fetch(
-        `${"https://www.cheapshark.com/api/1.0/deals?title="}${game.name}`
+        `${"https://www.cheapshark.com/api/1.0/deals?exact=1&title="}${game.name}`
       );
       if (!gameResponse.ok) throw Error("Did not receive deals.");
       const deals = await gameResponse.json();
@@ -82,7 +82,7 @@ export default function GameCard({ game }) {
             <GameScore score={game.metacritic}></GameScore>
           </div>
           <div className="">
-            <div className="mb-6 ml-6 text-xl h-12">{game.name}</div>
+            <div className="h-12 mb-6 ml-6 text-xl">{game.name}</div>
             <div className="hidden group-hover:block">
               <div className="flex justify-between mx-6 mb-14 ">
                 <div>
@@ -98,7 +98,7 @@ export default function GameCard({ game }) {
               </div>
               <div className="mx-6 mb-4">
                 <div>
-                  <div>Cheapest</div>
+                  <div className="text-lg">Cheapest</div>
                 </div>
                 <div className="flex justify-between text-right align-middle">
                   <div>{storeName}</div>
