@@ -4,52 +4,70 @@ import GameScore from "./GameScore";
 export default function GameCard({ game }) {
   
   const [bestPrice, setBestPrice] = useState("");
-  const [storeId, setStoreId] = useState("");
   const [storeName, setStoreName] = useState("");
   const [dealId, setDealId] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchPrices = async () => {
+
     setIsLoading(true);
 
     try {
       const gameResponse = await fetch(
         `${"https://www.cheapshark.com/api/1.0/deals?title="}${game.name}`
       );
-      if (!gameResponse.ok) throw Error("Did not receive prices.");
+      if (!gameResponse.ok) throw Error("Did not receive deals.");
       const deals = await gameResponse.json();
-      deals.map((deal) => {
-        if (deal.isOnSale === "1") {
-          if (deal.salePrice < bestPrice || bestPrice === "") {
-            setBestPrice(deal.salePrice);
-            setStoreId(deal.storeID);
-            setDealId(deal.dealID);
-          }
-        } else {
-          if (deal.normalPrice < bestPrice) {
-            setBestPrice(deal.normalPrice);
-            setStoreId(deal.storeID);
-            setDealId(deal.dealID);
-          }
-        }
-      });
+
+      const storeId = await findBestValue(deals);
 
       const storeResponse = await fetch(
         "https://www.cheapshark.com/api/1.0/stores"
       );
-      if (!storeResponse.ok) throw Error("Did not receive prices.");
+      if (!storeResponse.ok) throw Error("Did not receive stores.");
       const stores = await storeResponse.json();
-      stores.map((store) => {
-        if (store.storeID === storeId) {
-          setStoreName(store.storeName);
-        }
-      });
+
+      await checkStores(stores, storeId);
+      
     } catch (err) {
       console.log(err.message);
     } finally {
       setIsLoading(false);
     }
+  }
+
+  const findBestValue = async (deals) => {
+    let priceValue = "";
+    let storeIdValue = "";
+    let dealIdValue = "";
+
+    deals.map((deal) => {
+      if (deal.isOnSale === "1") {
+        if (deal.salePrice < priceValue || priceValue === "") {
+          priceValue = deal.salePrice;
+          storeIdValue = deal.storeID;
+          dealIdValue = deal.dealID;
+        }
+      } else {
+        if (deal.normalPrice < priceValue) {
+          priceValue = deal.normalPrice;
+          storeIdValue = deal.storeID;
+          dealIdValue = deal.dealID;
+        }
+      }
+    });
+    setBestPrice(priceValue);
+    setDealId(dealIdValue);
+    return storeIdValue;
+  }
+
+  const checkStores = async (stores, storeId) => {
+    stores.map((store) => {
+      if (store.storeID === storeId) {
+        setStoreName(store.storeName);
+      }
+    });
   }
 
   return (
@@ -84,21 +102,19 @@ export default function GameCard({ game }) {
                 </div>
                 <div className="flex justify-between text-right align-middle">
                   <div>{storeName}</div>
-                  <a className="p-2 bg-zinc-900 rounded-xl">
-                    {isLoading && "Loading"}
-                    {bestPrice !== "" && !isLoading && (
-                      <a
-                        href={`${"https://www.cheapshark.com/redirect?dealID="}${dealId}`}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        {bestPrice}$
-                      </a>
-                    )}
-                    {bestPrice === "" && !isLoading && (
-                      "Not Available"
-                    )}
-                  </a>
+                  {isLoading && "Loading"}
+                  {bestPrice !== "" && !isLoading && (
+                    <a className="p-2 bg-zinc-900 rounded-xl"
+                      href={`${"https://www.cheapshark.com/redirect?dealID="}${dealId}`}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {bestPrice}$
+                    </a>
+                  )}
+                  {bestPrice === "" && !isLoading && (
+                    "Not Available"
+                  )}
                 </div>
               </div>
             </div>

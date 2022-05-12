@@ -34,7 +34,7 @@ export default function Home() {
     <>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto&family=Rubik&display=swap"
           rel="stylesheet"
@@ -67,7 +67,7 @@ export default function Home() {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 mx-2 stroke-gray-900"
+                    className="w-6 h-6 mx-2 stroke-gray-900"
                     fill="none"
                     viewBox="0 0 24 24 "
                     stroke="currentColor"
@@ -83,7 +83,7 @@ export default function Home() {
                 <button className="mx-2 border-accent hover:border-accent/70 hover:stroke-accent/70 border-2 rounded-md w-[50px] h-[50px] flex justify-center items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 stroke-accent  "
+                    className="w-6 h-6 stroke-accent "
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={2}
