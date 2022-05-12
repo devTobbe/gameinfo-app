@@ -82,7 +82,7 @@ export default function GameCard({ game }) {
             <GameScore score={game.metacritic}></GameScore>
           </div>
           <div className="">
-            <div className="mb-6 ml-6 text-xl">{game.name}</div>
+            <div className="mb-6 ml-6 text-xl h-12">{game.name}</div>
             <div className="hidden group-hover:block">
               <div className="flex justify-between mx-6 mb-14 ">
                 <div>
