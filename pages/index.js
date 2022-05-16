@@ -60,15 +60,11 @@ export default function Home() {
             setNextPageLink={setNextPageLink}
             setCurrentPageNumber={setCurrentPageNumber}
           />
-          <GenreMenu></GenreMenu>
-          <PageNavigation
-            prevPageLink={prevPageLink}
-            setPrevPageLink={setPrevPageLink}
-            nextPageLink={nextPageLink}
-            setNextPageLink={setNextPageLink}
-            setGames={setGames}
-            currentPageNumber={currentPageNumber}
-            setCurrentPageNumber={setCurrentPageNumber}
+          <GenreMenu 
+          setGames={setGames}
+          setPrevPageLink={setPrevPageLink}
+          setNextPageLink={setNextPageLink}
+          setCurrentPageNumber={setCurrentPageNumber}
           />
           <div className="flex items-center justify-center">
             <div className="flex flex-col flex-wrap items-center md:h-[3200px] md:w-[704px] xl:h-[2250px] xl:w-[1056px] 2xl:h-[1670px] 2xl:w-[1408px]">

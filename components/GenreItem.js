@@ -1,20 +1,34 @@
-export default function GenreItem({ genre }) {
-  var toggled = false;
+import { useState } from "react";
+
+export default function GenreItem({ genre, handleFilter }) {
+
+  const [toggle, setToggle] = useState(false);
+
+  const handleToggleOn = () => {
+    setToggle(true);
+    handleFilter(genre.slug, true);
+  }
+
+  const handleToggleOff = () => {
+    setToggle(false);
+    handleFilter(genre.slug, false);
+  }
+
   return (
     <div>
-      {toggled ? (
+      {toggle ? (
         <button
-          onClick={() => (toggled = !toggled)}
-          className="m-1 text-zinc-800 font-Roboto rounded-md bg-accent px-2 opacity-100 hover:opacity-50 transition duration-300"
+          onClick={() => handleToggleOff()}
+          className="px-2 m-1 transition duration-300 border-2 rounded-md opacity-100 text-zinc-800 font-Roboto bg-accent hover:opacity-50 border-accent"
         >
-          {genre}
+          {genre.name}
         </button>
       ) : (
         <button
-          onClick={() => (toggled = !toggled)}
-          className="m-1 text-accent font-Roboto border-2 border-accent rounded-md px-2 opacity-100 hover:opacity-50 transition duration-300"
+          onClick={() => handleToggleOn()}
+          className="px-2 m-1 transition duration-300 border-2 rounded-md opacity-100 text-accent font-Roboto border-accent hover:opacity-50"
         >
-          {genre}
+          {genre.name}
         </button>
       )}
     </div>
