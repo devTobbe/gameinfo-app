@@ -13,12 +13,12 @@ export default function GameScore({ score }) {
           {score}
         </div>
       )}
-      {score < lowscore && (
+      {score < lowscore && score > 0 && (
         <div className="border inline-flex px-1 rounded-lg border-red-400 text-red-400 bg-red-400/[0.1] mt-1 mr-1">
           {score}
         </div>
       )}
-      {score < 0 && (
+      {score <= 0 && (
         <div className="border inline-flex px-1 rounded-lg border-white-400 text-white-400 bg-white-400/[0.1] mt-1 mr-1">
           ?
         </div>
