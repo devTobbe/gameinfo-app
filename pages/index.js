@@ -5,6 +5,7 @@ import PageNavigation from "../components/PageNavigation";
 import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import Search from "../components/Search";
+import GenreMenu from "../components/GenreMenu";
 
 export default function Home() {
   const [games, setGames] = useState([]);
@@ -59,6 +60,7 @@ export default function Home() {
             setNextPageLink={setNextPageLink}
             setCurrentPageNumber={setCurrentPageNumber}
           />
+          <GenreMenu></GenreMenu>
           <PageNavigation
             prevPageLink={prevPageLink}
             setPrevPageLink={setPrevPageLink}
