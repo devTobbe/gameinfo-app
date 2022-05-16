@@ -1,10 +1,17 @@
 import GenreItem from "./GenreItem";
 import { useState, useEffect } from "react"
 
-export default function GenreMenu({setGames, setPrevPageLink, setNextPageLink, setCurrentPageNumber}) {
+export default function GenreMenu({
+  setGames,
+  setPrevPageLink,
+  setNextPageLink,
+  setCurrentPageNumber,
+  searchUrl,
+  filterUrl,
+  setFilterUrl
+}) {
 
   const [genres, setGenres] = useState([]);
-  const [filterURL, setFilterURL] = useState("https://api.rawg.io/api/games?key=dc469c23c1bb4c1bbb5d9562b46e5082&platforms=4&genres=")
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -25,19 +32,17 @@ export default function GenreMenu({setGames, setPrevPageLink, setNextPageLink, s
 
   const handleFilter = async (genreSlug, toggle) => {
 
-    var newFilterURL = filterURL;
+    var newFilterURL = filterUrl;
 
     if (toggle) {
-      newFilterURL = newFilterURL + "," + decapitalize(genreSlug);
+      newFilterURL = newFilterURL + "," + genreSlug;
     } else {
-      newFilterURL = newFilterURL.replace("," + decapitalize(genreSlug), "");
-      if (newFilterURL === "https://api.rawg.io/api/games?key=dc469c23c1bb4c1bbb5d9562b46e5082&platforms=4&genres=") {
-        newFilterURL = "https://api.rawg.io/api/games?key=dc469c23c1bb4c1bbb5d9562b46e5082&platforms=4";
-      }
+      newFilterURL = newFilterURL.replace("," + genreSlug, "");
     }
 
     try {
-      const gameResponse = await fetch(newFilterURL);
+      const gameResponse = await fetch("https://api.rawg.io/api/games?key=dc469c23c1bb4c1bbb5d9562b46e5082&platforms=4"
+      + (newFilterURL !== "&genres=" ? newFilterURL : "") + searchUrl);
       if (!gameResponse.ok) throw Error("Did not receive games.");
       const games = await gameResponse.json();
       setGames(games.results);
@@ -47,16 +52,9 @@ export default function GenreMenu({setGames, setPrevPageLink, setNextPageLink, s
     } catch (err) {
       console.log(err.message);
     } finally {
-      if (newFilterURL === "https://api.rawg.io/api/games?key=dc469c23c1bb4c1bbb5d9562b46e5082&platforms=4") {
-        setFilterURL("https://api.rawg.io/api/games?key=dc469c23c1bb4c1bbb5d9562b46e5082&platforms=4&genres=")
-      } else {
-        setFilterURL(newFilterURL);
-      }
+      setFilterUrl(newFilterURL);
     }
   }
-
-  const decapitalize = ([first, ...rest]) =>
-  first.toLowerCase() + rest.join('');
 
   return (
     <div className="relative my-4 p-4 w-[100%] bg-zinc-800">

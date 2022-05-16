@@ -5,16 +5,18 @@ const Search = ({
   setPrevPageLink,
   setNextPageLink,
   setCurrentPageNumber,
+  setSearchUrl,
+  filterUrl
 }) => {
+
   const [search, setSearch] = useState("");
 
   const handleSearch = async (e) => {
     e.preventDefault();
 
     try {
-      const gameResponse = await fetch(
-        `${"https://api.rawg.io/api/games?key=dc469c23c1bb4c1bbb5d9562b46e5082&platforms=4&search="}${search}`
-      );
+      const gameResponse = await fetch("https://api.rawg.io/api/games?key=dc469c23c1bb4c1bbb5d9562b46e5082&platforms=4"
+      + "&search=" + search + (filterUrl !== "&genres=" ? filterUrl : ""));
       if (!gameResponse.ok) throw Error("Did not receive games.");
       const games = await gameResponse.json();
       setGames(games.results);
@@ -23,6 +25,8 @@ const Search = ({
       setNextPageLink(games.next);
     } catch (err) {
       console.log(err.message);
+    } finally {
+      setSearchUrl("&search=" + search);
     }
   };
 
