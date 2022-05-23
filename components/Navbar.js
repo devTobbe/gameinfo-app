@@ -77,10 +77,10 @@ export default function Navbar() {
             />
           </svg>
 
-          <a className="text-white text-m hover:text-accent/80" href="#">
+          <a className="text-white text-m hover:text-accent/80" href="/">
             GAMES
           </a>
-          <a className="text-white text-m hover:text-accent/80" href="#">
+          <a className="text-white text-m hover:text-accent/80" href="/about">
             ABOUT
           </a>
         </div>
