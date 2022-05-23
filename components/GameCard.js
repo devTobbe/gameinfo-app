@@ -70,7 +70,7 @@ export default function GameCard({ game }) {
   };
 
   return (
-    <div className="relative m-4 w-80">
+    <a className="relative m-4 w-80 cursor-pointer">
       <div
         className="flex flex-col justify-center text-white group w-80 rounded-3xl bg-zinc-800 drop-shadow-lg"
         onMouseEnter={fetchPrices}
@@ -122,6 +122,6 @@ export default function GameCard({ game }) {
           </div>
         </div>
       </div>
-    </div>
+    </a>
   );
 }
