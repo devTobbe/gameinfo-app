@@ -1,4 +1,5 @@
 import React from "react";
+import GameScore from "./GameScore";
 
 const GameInfo = () => {
   return (
@@ -8,21 +9,21 @@ const GameInfo = () => {
           <img
             className="object-cover w-100 h-100 blur-lg"
             src="https://cdn-ext.fanatical.com/production/product/1280x720/d2097e15-1730-4ce9-aa9b-6682e4d48741.jpeg"
+            alt="Blurry INSERT GAME NAME HERE artwork"
           />
         </div>
         <img
           className="z-10 h-[280px] w-[208px] rounded-2xl"
           src="https://m.media-amazon.com/images/M/MV5BOTY0NmQxYzktYzFhNi00OGJkLTg4MjEtYTUyZjAzMDBkYjI3XkEyXkFqcGdeQXVyMTk2OTAzNTI@._V1_FMjpg_UX1000_.jpg"
+          alt="INSERT GAME NAME HERE image"
         />
-        <h1 className="text-white">BORDERLANDS 2</h1>
-        <p className="text-white">GEARBOX</p>
-        <p className="px-2 text-green-400 border-2 border-green-400 rounded-lg bg-green-400/10">
-          89
-        </p>
+        <h1 className="text-white font-Rubik font-bold">BORDERLANDS 2</h1>
+        <p className="text-white font-Rubik">GEARBOX</p>
+        <GameScore score={game.metacritic} />
         <div className="flex w-[100%] max-w-[570px] flex-col items-center space-y-4">
           <div className="flex w-[80%] flex-row justify-between">
-            <p className="uppercase">released</p>
-            <p>2012-09-18</p>
+            <p className="uppercase font-Rubik">released</p>
+            <p className="font-Roboto">2012-09-18</p>
           </div>
           <div className="flex w-[80%] flex-row justify-between">
             <p className="uppercase">genres</p>
