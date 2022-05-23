@@ -2,11 +2,11 @@ import React from "react";
 
 const GameInfo = () => {
   return (
-    <div className="-z-50 flex min-h-screen flex-col justify-start overflow-hidden bg-zinc-900 py-6 text-white">
+    <div className="flex flex-col justify-start min-h-screen py-6 overflow-hidden text-white -z-50 bg-zinc-900">
       <div className="flex flex-col items-center space-y-1">
         <div className="w-100 overflow absolute h-[300px] overflow-hidden blur-lg">
           <img
-            className="w-100 h-100 object-cover blur-lg"
+            className="object-cover w-100 h-100 blur-lg"
             src="https://cdn-ext.fanatical.com/production/product/1280x720/d2097e15-1730-4ce9-aa9b-6682e4d48741.jpeg"
           />
         </div>
@@ -16,7 +16,7 @@ const GameInfo = () => {
         />
         <h1 className="text-white">BORDERLANDS 2</h1>
         <p className="text-white">GEARBOX</p>
-        <p className="rounded-lg border-2 border-green-400 bg-green-400/10 px-2 text-green-400">
+        <p className="px-2 text-green-400 border-2 border-green-400 rounded-lg bg-green-400/10">
           89
         </p>
         <div className="flex w-[100%] max-w-[570px] flex-col items-center space-y-4">
@@ -30,7 +30,7 @@ const GameInfo = () => {
           </div>
           <div className="flex w-[80%] flex-row justify-between">
             <p className="uppercase">cheapest</p>
-            <div className="bg-zinc-900 capitalize text-white">19.99$</div>
+            <div className="text-white capitalize bg-zinc-900">19.99$</div>
           </div>
           <h1>GALLERY PLACEHOLDER</h1>
           <h1 className="capitalize">information:</h1>

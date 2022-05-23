@@ -8,10 +8,13 @@ export default function GenreMenu({
   setCurrentPageNumber,
   searchUrl,
   filterUrl,
-  setFilterUrl
+  setFilterUrl,
+  setIsLoading
 }) {
 
   const [genres, setGenres] = useState([]);
+
+  const [isLoadingGenres, setIsLoadingGenres] = useState(true);
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -24,6 +27,8 @@ export default function GenreMenu({
         setGenres(genres.results);
       } catch (err) {
         console.log(err.message);
+      } finally {
+        setIsLoadingGenres(false);
       }
     };
 
@@ -31,6 +36,8 @@ export default function GenreMenu({
   }, []);
 
   const handleFilter = async (genreSlug, toggle) => {
+
+    setIsLoading(true);
 
     var newFilterURL = filterUrl;
 
@@ -53,6 +60,7 @@ export default function GenreMenu({
       console.log(err.message);
     } finally {
       setFilterUrl(newFilterURL);
+      setIsLoading(false);
     }
   }
 
@@ -61,9 +69,12 @@ export default function GenreMenu({
       <div className="flex flex-col items-center">
         <h1 className="text-2xl text-slate-50 font-Rubik ">Genres</h1>
         <div className="flex flex-wrap max-w-[346px] justify-center">
-          {genres.map((genre) => (
-            <GenreItem key={genre.id} genre={genre} handleFilter={handleFilter} />
-          ))}
+          {isLoadingGenres && <p className="text-accent">Loading Genres...</p>}
+          {!isLoadingGenres && (
+            genres.map((genre) => (
+              <GenreItem key={genre.id} genre={genre} handleFilter={handleFilter} />
+            ))
+          )}
         </div>
       </div>
     </div>
