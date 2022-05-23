@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+
+/*
+
+Use following to implement carousel. 
+
+import { Carousel } from "react-responsive-carousel";
+import NextJsCarousel from "../components/Carousel";
+
+<NextJsCarousel></NextJsCarousel>
+*/
   
 export default class NextJsCarousel extends Component {
+
     render() {
         return (
             <div>
