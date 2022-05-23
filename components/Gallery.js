@@ -3,6 +3,7 @@ import React from "react";
 export default function Gallery({screenshots}){
 
     var game_pk = "";
+    
     count = 0;
     next = "<uri>";
     previous = "<uri>";
@@ -16,6 +17,9 @@ export default function Gallery({screenshots}){
     } catch (err) {
         console.log(err.message);
     }
+
+    const images = [screenshots] 
+
 /*
     {
         "count": 0,
