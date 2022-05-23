@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import GameScore from "./GameScore";
 
-export default function GameCard({ game }) {
+export default function GameCard({ game, setSpecificGame }) {
   const [bestPrice, setBestPrice] = useState("");
   const [storeName, setStoreName] = useState("");
   const [dealId, setDealId] = useState("");
@@ -70,10 +70,10 @@ export default function GameCard({ game }) {
   };
 
   return (
-    <a
-      className="relative m-4 w-80 cursor-pointer"
+    <button
+      className="relative m-4 cursor-pointer w-80"
       onClick={() => {
-        setPage("Game");
+        setSpecificGame(game.id);
       }}
     >
       <div
@@ -127,6 +127,6 @@ export default function GameCard({ game }) {
           </div>
         </div>
       </div>
-    </a>
+    </button>
   );
 }

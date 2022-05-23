@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import Search from "../components/Search";
 import GenreMenu from "../components/GenreMenu";
+import GameInfo from "../components/GameInfo";
 
 export default function Home() {
   const [games, setGames] = useState([]);
@@ -21,6 +22,8 @@ export default function Home() {
   const [genreToggle, setGenreToggle] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
+
+  const [specificGame, setSpecificGame] = useState("");
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -56,56 +59,60 @@ export default function Home() {
       <a id="top"></a>
       <div className="flex flex-col bg-zinc-900">
         <Navbar />
-        <div className="">
-          <div className="py-8 text-center basis-2/5">
-            <h1 className="text-2xl text-slate-50 font-Rubik">Games</h1>
-            <h4 className="text-accent text-1xl font-Roboto">
-              Featured in May
-            </h4>
-          </div>
-          <Search
-            setGames={setGames}
-            setPrevPageLink={setPrevPageLink}
-            setNextPageLink={setNextPageLink}
-            setCurrentPageNumber={setCurrentPageNumber}
-            setSearchUrl={setSearchUrl}
-            filterUrl={filterUrl}
-            genreToggle={genreToggle}
-            setGenreToggle={setGenreToggle}
-            setIsLoading={setIsLoading}
-          />
-          {genreToggle && (
-            <GenreMenu 
-            setGames={setGames}
-            setPrevPageLink={setPrevPageLink}
-            setNextPageLink={setNextPageLink}
-            setCurrentPageNumber={setCurrentPageNumber}
-            searchUrl={searchUrl}
-            filterUrl={filterUrl}
-            setFilterUrl={setFilterUrl}
-            setIsLoading={setIsLoading}
-          />
-          )}
-          <div className="flex items-center justify-center">
-            <div className="flex flex-col flex-wrap items-center md:h-[3200px] md:w-[704px] xl:h-[2250px] xl:w-[1056px] 2xl:h-[1670px] 2xl:w-[1408px]">
-              {isLoading && <p className="text-accent">Loading Games...</p>}
-              {!isLoading && (
-                games.map((game) => (
-                  <GameCard key={game.id} game={game}></GameCard>
-                ))
-              )}
+        {specificGame !== "" ? (
+          <GameInfo gameId={specificGame} />
+        ) : (
+          <div className="">
+            <div className="py-8 text-center basis-2/5">
+              <h1 className="text-2xl text-slate-50 font-Rubik">Games</h1>
+              <h4 className="text-accent text-1xl font-Roboto">
+                Featured in May
+              </h4>
             </div>
+            <Search
+              setGames={setGames}
+              setPrevPageLink={setPrevPageLink}
+              setNextPageLink={setNextPageLink}
+              setCurrentPageNumber={setCurrentPageNumber}
+              setSearchUrl={setSearchUrl}
+              filterUrl={filterUrl}
+              genreToggle={genreToggle}
+              setGenreToggle={setGenreToggle}
+              setIsLoading={setIsLoading}
+            />
+            {genreToggle && (
+              <GenreMenu 
+              setGames={setGames}
+              setPrevPageLink={setPrevPageLink}
+              setNextPageLink={setNextPageLink}
+              setCurrentPageNumber={setCurrentPageNumber}
+              searchUrl={searchUrl}
+              filterUrl={filterUrl}
+              setFilterUrl={setFilterUrl}
+              setIsLoading={setIsLoading}
+            />
+            )}
+            <div className="flex items-center justify-center">
+              <div className="flex flex-col flex-wrap items-center md:h-[3200px] md:w-[704px] xl:h-[2250px] xl:w-[1056px] 2xl:h-[1670px] 2xl:w-[1408px]">
+                {isLoading && <p className="text-accent">Loading Games...</p>}
+                {!isLoading && (
+                  games.map((game) => (
+                    <GameCard key={game.id} game={game} setSpecificGame={setSpecificGame}></GameCard>
+                  ))
+                )}
+              </div>
+            </div>
+            <PageNavigation
+              prevPageLink={prevPageLink}
+              setPrevPageLink={setPrevPageLink}
+              nextPageLink={nextPageLink}
+              setNextPageLink={setNextPageLink}
+              setGames={setGames}
+              currentPageNumber={currentPageNumber}
+              setCurrentPageNumber={setCurrentPageNumber}
+            />
           </div>
-          <PageNavigation
-            prevPageLink={prevPageLink}
-            setPrevPageLink={setPrevPageLink}
-            nextPageLink={nextPageLink}
-            setNextPageLink={setNextPageLink}
-            setGames={setGames}
-            currentPageNumber={currentPageNumber}
-            setCurrentPageNumber={setCurrentPageNumber}
-          />
-        </div>
+        )}
       </div>
       <Footer />
     </>
