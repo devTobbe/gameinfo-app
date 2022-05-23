@@ -104,7 +104,7 @@ export default function GameCard({ game }) {
                 </div>
                 <div className="flex justify-between text-right align-middle">
                   <div>{storeName}</div>
-                  {isLoading && "Loading"}
+                  {isLoading && "Loading..."}
                   {bestPrice !== "" && !isLoading && (
                     <a
                       className="p-2 bg-zinc-900 rounded-xl"
