@@ -1,9 +1,8 @@
 import React from "react";
 import GameScore from "./GameScore";
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react";
 
-const GameInfo = ({gameId}) => {
-
+const GameInfo = ({ gameId }) => {
   const [specificGameInfo, setSpecificGameInfo] = useState("");
 
   const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +11,9 @@ const GameInfo = ({gameId}) => {
     const fetchSpecificGame = async () => {
       try {
         const gameResponse = await fetch(
-          "https://api.rawg.io/api/games/"+gameId+"?key=dc469c23c1bb4c1bbb5d9562b46e5082"
+          "https://api.rawg.io/api/games/" +
+            gameId +
+            "?key=dc469c23c1bb4c1bbb5d9562b46e5082"
         );
         if (!gameResponse.ok) throw Error("Did not receive gameInfo.");
         const game = await gameResponse.json();
@@ -45,13 +46,15 @@ const GameInfo = ({gameId}) => {
               src={specificGameInfo.background_image}
               alt={specificGameInfo.name + " image"}
             />
-            <h1 className="font-bold text-white font-Rubik">{specificGameInfo.name}</h1>
+            <h1 className="font-bold text-white font-Rubik">
+              {specificGameInfo.name}
+            </h1>
             <ul>
-                {specificGameInfo.developers.map((developer) => (
-                  <li key={developer.id} className="text-white font-Rubik">
-                    {developer.name}
-                  </li>
-                ))}
+              {specificGameInfo.developers.map((developer) => (
+                <li key={developer.id} className="text-white font-Rubik">
+                  {developer.name}
+                </li>
+              ))}
             </ul>
             <GameScore score={specificGameInfo.metacritic} />
             <div className="flex w-[100%] max-w-[570px] flex-col items-center space-y-4">
@@ -63,10 +66,10 @@ const GameInfo = ({gameId}) => {
                 <p className="uppercase">genres</p>
                 <ul>
                   {specificGameInfo.genres.map((genre) => (
-                  <li key={genre.id} className="w-40 text-right capitalize">
-                    {genre.name}
-                  </li>
-                ))}
+                    <li key={genre.id} className="w-40 text-right capitalize">
+                      {genre.name}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="flex w-[80%] flex-row justify-between">
@@ -79,9 +82,12 @@ const GameInfo = ({gameId}) => {
                 <p className="uppercase">platforms</p>
                 <ul>
                   {specificGameInfo.platforms.map((platform) => (
-                  <li key={platform.platform.id} className="w-40 text-right capitalize">
-                    {platform.platform.name}
-                  </li>
+                    <li
+                      key={platform.platform.id}
+                      className="w-40 text-right capitalize"
+                    >
+                      {platform.platform.name}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -101,6 +107,25 @@ const GameInfo = ({gameId}) => {
                   ))}
                 </ul>
               </div>
+              <button
+                onClick={() => {}}
+                className="flex justify-start border-2 p-1 rounded-full border-white/0 hover:border-white/100 hover:opacity-60 transition duration-300"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
               <p className="uppercase">similar games placeholder</p>
             </div>
           </div>
