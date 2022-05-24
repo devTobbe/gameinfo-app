@@ -60,7 +60,7 @@ export default function Home() {
       <div className="flex flex-col bg-zinc-900">
         <Navbar />
         {specificGame !== "" ? (
-          <GameInfo gameId={specificGame} />
+          <GameInfo gameId={specificGame} setSpecificGame={setSpecificGame} />
         ) : (
           <div className="">
             <div className="py-8 text-center basis-2/5">

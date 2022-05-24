@@ -2,18 +2,19 @@ import React from "react";
 import GameScore from "./GameScore";
 import { useState, useEffect } from "react";
 
-const GameInfo = ({ gameId }) => {
+const GameInfo = ({ gameId, setSpecificGame }) => {
   const [specificGameInfo, setSpecificGameInfo] = useState("");
+
+  const [bestPrice, setBestPrice] = useState("");
 
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+
     const fetchSpecificGame = async () => {
       try {
         const gameResponse = await fetch(
-          "https://api.rawg.io/api/games/" +
-            gameId +
-            "?key=dc469c23c1bb4c1bbb5d9562b46e5082"
+          "https://api.rawg.io/api/games/"+gameId+"?key=dc469c23c1bb4c1bbb5d9562b46e5082"
         );
         if (!gameResponse.ok) throw Error("Did not receive gameInfo.");
         const game = await gameResponse.json();
@@ -24,16 +25,51 @@ const GameInfo = ({ gameId }) => {
         setIsLoading(false);
       }
     };
-
+    
     (async () => await fetchSpecificGame())();
   }, []);
 
+  const fetchPrices = async () => {
+
+    try {
+      const dealResponse = await fetch(
+        `${"https://www.cheapshark.com/api/1.0/deals?exact=1&title="}${
+          specificGameInfo.name
+        }`
+      );
+      if (!dealResponse.ok) throw Error("Did not receive deals.");
+      const deals = await dealResponse.json();
+
+      await findBestValue(deals);
+
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const findBestValue = async (deals) => {
+    let priceValue = "";
+
+    deals.map((deal) => {
+      if (deal.isOnSale === "1") {
+        if (deal.salePrice < priceValue || priceValue === "") {
+          priceValue = deal.salePrice;
+        }
+      } else {
+        if (deal.normalPrice < priceValue) {
+          priceValue = deal.normalPrice;
+        }
+      }
+    });
+    setBestPrice(priceValue);
+  };
+
   return (
     <>
-      {isLoading && <p className="text-accent">Loading...</p>}
-      {!isLoading && (
         <div className="flex flex-col justify-start min-h-screen py-6 overflow-hidden text-white bg-zinc-900">
-          <div className="flex flex-col items-center space-y-1">
+          {isLoading && <p className="text-center text-accent">Loading...</p>}
+          {!isLoading && (
+          <div className="flex flex-col items-center space-y-1" onLoadStart={fetchPrices()}>
             <div className="w-100 overflow absolute h-[300px] overflow-hidden blur-lg">
               <img
                 className="object-cover w-100 h-100 blur-lg"
@@ -42,7 +78,7 @@ const GameInfo = ({ gameId }) => {
               />
             </div>
             <img
-              className="z-10 h-[280px] w-[208px] rounded-2xl"
+              className="object-cover object-center block ml-auto mr-auto  z-10 h-[280px] w-[208px] rounded-2xl"
               src={specificGameInfo.background_image}
               alt={specificGameInfo.name + " image"}
             />
@@ -74,7 +110,7 @@ const GameInfo = ({ gameId }) => {
               </div>
               <div className="flex w-[80%] flex-row justify-between">
                 <p className="uppercase">cheapest</p>
-                <div className="text-white capitalize bg-zinc-900">price$</div>
+                <div className="text-white capitalize bg-zinc-900">{bestPrice}$</div>
               </div>
               <h1>GALLERY PLACEHOLDER</h1>
               <h1 className="capitalize">information:</h1>
@@ -92,12 +128,6 @@ const GameInfo = ({ gameId }) => {
                 </ul>
               </div>
               <div className="flex w-[80%] flex-row items-center justify-between">
-                <p className="uppercase">languages</p>
-                <p className="w-40 text-right capitalize">
-                  English, Dutch, Spansih, German, French
-                </p>
-              </div>
-              <div className="flex w-[80%] flex-row items-center justify-between">
                 <p className="uppercase">publisher</p>
                 <ul>
                   {specificGameInfo.publishers.map((publisher) => (
@@ -108,12 +138,12 @@ const GameInfo = ({ gameId }) => {
                 </ul>
               </div>
               <button
-                onClick={() => {}}
-                className="flex justify-start border-2 p-1 rounded-full border-white/0 hover:border-white/100 hover:opacity-60 transition duration-300"
+                onClick={() => {setSpecificGame("")}}
+                className="flex justify-start p-1 transition duration-300 border-2 rounded-full border-white/0 hover:border-white/100 hover:opacity-60"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="w-6 h-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -129,8 +159,8 @@ const GameInfo = ({ gameId }) => {
               <p className="uppercase">similar games placeholder</p>
             </div>
           </div>
+          )}
         </div>
-      )}
     </>
   );
 };
