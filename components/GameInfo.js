@@ -1,5 +1,6 @@
 import React from "react";
 import GameScore from "./GameScore";
+import NextJsCarousel from "../components/Carousel";
 import { useState, useEffect } from "react";
 
 const GameInfo = ({ gameId, setSpecificGame }) => {
@@ -8,6 +9,8 @@ const GameInfo = ({ gameId, setSpecificGame }) => {
   const [bestPrice, setBestPrice] = useState("");
 
   const [isLoading, setIsLoading] = useState(true);
+
+  //const [screenshots, setScreenshots] = useState("");
 
   useEffect(() => {
 
@@ -64,6 +67,20 @@ const GameInfo = ({ gameId, setSpecificGame }) => {
     setBestPrice(priceValue);
   };
 
+  const fetchScreenshots = async () => {
+
+    try {
+      const imageResponse = await fetch(
+        "https://api.rawg.io/api/games/"+gameId+"/screenshots");
+      if (!gameResponse.ok) throw Error("Did not receive screenshots.");
+      const screenshots = await imageResponse.json();
+      const images = []; 
+      images[0] = screenshots.results[0]; // help
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return (
     <>
         <div className="flex flex-col justify-start min-h-screen py-6 overflow-hidden text-white bg-zinc-900">
@@ -112,7 +129,9 @@ const GameInfo = ({ gameId, setSpecificGame }) => {
                 <p className="uppercase">cheapest</p>
                 <div className="text-white capitalize bg-zinc-900">{bestPrice}$</div>
               </div>
-              <h1>GALLERY PLACEHOLDER</h1>
+              <h1>GALLERY</h1>
+              <NextJsCarousel></NextJsCarousel>
+              <div className="flex flex-col items-center space-y-1" onLoadStart={fetchScreenshots()}></div>
               <h1 className="capitalize">information:</h1>
               <div className="flex w-[80%] flex-row items-center justify-between">
                 <p className="uppercase">platforms</p>
