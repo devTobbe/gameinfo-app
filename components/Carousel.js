@@ -11,37 +11,23 @@ import NextJsCarousel from "../components/Carousel";
 
 <NextJsCarousel></NextJsCarousel>
 */
-  
-export default class NextJsCarousel extends Component {
 
-    //const images = []; = [{jsonobject 1,... }]
+function createScreenshot (item){
+
+
+    return (<div key={item.id}>
+        <img src={item.image} alt="image1"/>
+    </div>);
+}
+
+export default function NextJsCarousel ({ images }) {
     
 // exchange img src to indexes in array of screenshots fetched from api
-    render() {
-        return (
-            <div className = "container flex flex-wrap items-center space-x-4 text-center">
-              <Carousel>
-                  <div>
-                    <img src="https://media.rawg.io/media/resize/420/-/screenshots/616/61643dd96e936d29eb68cf53b2334e53.jpg" alt="image1"/>
-
-                    
-                    </div>
-                    <div>
-                        <img src="https://media.rawg.io/media/resize/420/-/screenshots/616/61643dd96e936d29eb68cf53b2334e53.jpg" alt="image2" />
-
-
-                    </div>
-                    <div>
-                        <img src="https://media.rawg.io/media/resize/420/-/screenshots/7ac/7acf51129805f3f6a0cbf7cd0c61c2c4.jpg" alt="image3"/>
-
-
-                    </div>
-                    <div>
-                        <img src="https://media.rawg.io/media/resize/420/-/screenshots/7af/7af0ba8170f70e31478fb45415988faa.jpg" alt="image4"/>
-
-                    </div>
-                </Carousel>
-            </div>
-        );
-    }
+     return (
+        <div className = "container flex flex-wrap items-center space-x-4 text-center">
+            <Carousel>
+             {images.map(image => createScreenshot(image))}
+             </Carousel>
+        </div>
+    );
 };

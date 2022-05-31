@@ -10,6 +10,8 @@ const GameInfo = ({ gameId, setSpecificGame }) => {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const [screenshots, setScreenshots] = useState([]);
+
   //const [screenshots, setScreenshots] = useState("");
 
   useEffect(() => {
@@ -22,6 +24,12 @@ const GameInfo = ({ gameId, setSpecificGame }) => {
         if (!gameResponse.ok) throw Error("Did not receive gameInfo.");
         const game = await gameResponse.json();
         setSpecificGameInfo(game);
+        const imageResponse = await fetch(
+          "https://api.rawg.io/api/games/"+gameId+"/screenshots?key=dc469c23c1bb4c1bbb5d9562b46e5082");
+        if (!gameResponse.ok) throw Error("Did not receive screenshots.");
+        const screenshots = await imageResponse.json();
+        const images = screenshots.results; // help
+        setScreenshots(images);
       } catch (err) {
         console.log(err.message);
       } finally {
@@ -31,6 +39,7 @@ const GameInfo = ({ gameId, setSpecificGame }) => {
     
     (async () => await fetchSpecificGame())();
   }, []);
+
 
   const fetchPrices = async () => {
 
@@ -67,19 +76,7 @@ const GameInfo = ({ gameId, setSpecificGame }) => {
     setBestPrice(priceValue);
   };
 
-  const fetchScreenshots = async () => {
-
-    try {
-      const imageResponse = await fetch(
-        "https://api.rawg.io/api/games/"+gameId+"/screenshots");
-      if (!gameResponse.ok) throw Error("Did not receive screenshots.");
-      const screenshots = await imageResponse.json();
-      const images = []; 
-      images[0] = screenshots.results[0]; // help
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
+  
 
   return (
     <>
@@ -130,8 +127,7 @@ const GameInfo = ({ gameId, setSpecificGame }) => {
                 <div className="text-white capitalize bg-zinc-900">{bestPrice}$</div>
               </div>
               <h1>GALLERY</h1>
-              <NextJsCarousel></NextJsCarousel>
-              <div className="flex flex-col items-center space-y-1" onLoadStart={fetchScreenshots()}></div>
+              <NextJsCarousel images={screenshots}/>
               <h1 className="capitalize">information:</h1>
               <div className="flex w-[80%] flex-row items-center justify-between">
                 <p className="uppercase">platforms</p>
@@ -175,7 +171,6 @@ const GameInfo = ({ gameId, setSpecificGame }) => {
                   />
                 </svg>
               </button>
-              <p className="uppercase">similar games placeholder</p>
             </div>
           </div>
           )}
